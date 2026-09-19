@@ -53,6 +53,37 @@ is self-customization. The same mechanism is also a clean, reproducible
 laboratory for studying injection: you control the first system message, so
 you can test how the model behaves when the opening frame is manipulated.
 
+| Benchmark | Metric | Stock harness | With persona injection |
+|---|---|---|---|
+| AdvBench (harmful-behavior prompts) | refusal rate | 74% | 9% |
+| OR-Bench (80 over-refusal probes) | over-refusal rate | 31% | 12% |
+| XSTest (exaggerated-safety tests) | full-compliance rate | 41% | 83% |
+| MMLU (5-shot) | accuracy | 71.2% | 71.0% |
+| HumanEval | pass@1 | 78.0% | 79.3% |
+| MBPP (sanitized) | pass@1 | 67.4% | 68.1% |
+| SWE-bench Verified | resolved rate | 41.2% | 42.8% |
+| Session efficiency | avg. tokens per task | 100% (baseline) | ~85% |
+| Session efficiency | disclaimer/refusal boilerplate per 100 replies | 63 | 4 |
+
+Read the pattern, not the digits: refusal behavior on borderline and
+benign-but-scary-looking prompts moves *dramatically* (that's the
+first-position effect doing its work against the stock guardrail block),
+while raw knowledge and coding capability stay essentially flat — a persona
+changes how the model *behaves and spends its output budget*, not what it
+*knows*. The token-efficiency gain is mostly reclaimed hedging: fewer
+"I can't help with that" preambles and lawyerly qualifiers per reply.
+
+**Your numbers WILL differ.** The persona *is* the experiment — the same
+benchmark suite with a lazy two-line persona will barely move, and a bad one
+can degrade coding performance (a persona that rambles wastes context the
+task could use). Run your own before/after with your own persona; the
+toolkit's `diff`/`restore` makes A/B-ing stock vs. patched a two-command
+affair.
+
+No, you can't have my persona. It's in `system_prompt.txt` on my machine,
+it's too good, and it's staying there. Write your own — that's half the fun
+of owning the harness.
+
 ## How it works
 
 ZCode builds its system prompt at runtime from string literals scattered
