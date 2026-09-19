@@ -1,3 +1,5 @@
+English | [简体中文](README.zh-CN.md)
+
 # zcode-prompt-toolkit
 
 Take full control of the prompts inside your own ZCode desktop harness.
