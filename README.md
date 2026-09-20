@@ -177,6 +177,17 @@ re-run `_gen_customizer.py` against the new bundle (or update the anchor).
 - Everything here modifies **your own local installation** of your own app on
   your own machine. That is the point.
 
+## Screenshot from after using a persona via the script-
+<img width="1047" height="653" alt="image" src="https://github.com/user-attachments/assets/0bc1fe11-3e73-42ab-a242-a84e986e1ffc" />
+
+## Task refusal from default zcode without any persona in use-
+<img width="959" height="630" alt="image" src="https://github.com/user-attachments/assets/a7a9e941-0fca-401c-a53b-46c5ede70c66" />
+
+## Same task with custom persona injected, the persona is by default placed as the first prompt the model recieves-
+<img width="929" height="699" alt="image" src="https://github.com/user-attachments/assets/f01f2864-677f-4e8b-ac3e-5bf16040f891" />
+
+
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
