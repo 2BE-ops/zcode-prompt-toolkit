@@ -28,7 +28,8 @@ BASE = _find_bundle_dir()
 OUTDIR = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 
 try:
-    orig = open(BASE + "zcode.cjs.orig", "r", encoding="utf-8", errors="replace").read()
+    orig = open(BASE + "zcode.cjs.orig", "r", encoding="utf-8", errors="replace",
+                newline="").read()
 except FileNotFoundError:
     sys.exit(
         "ERROR: pristine zcode.cjs.orig not found next to the bundle.\n"
@@ -395,7 +396,7 @@ def _collect_edits(orig):
 def apply():
     if not ORIG.exists():
         raise SystemExit(f"Missing pristine backup {ORIG}. Run patch_zcode.py once first.")
-    orig = ORIG.read_text(encoding="utf-8")
+    orig = open(ORIG, "r", encoding="utf-8", newline="").read()
     shutil.copy2(TARGET, TARGET.with_suffix(TARGET.suffix + ".bak"))
     edits = _collect_edits(orig)
     pe = _persona_edit(orig)
@@ -409,7 +410,8 @@ def apply():
     data = orig
     for s, e, repl, pid in sorted(edits, key=lambda x: x[0], reverse=True):
         data = data[:s] + repl + data[e:]
-    TARGET.write_text(data, encoding="utf-8")
+    with open(TARGET, "w", encoding="utf-8", newline="") as f:
+        f.write(data)
     changed = sorted(pid for *_, pid in edits if pid != "__persona__")
     print(f"Applied. Persona injected: {persona_injected}. Changed {len(changed)} prompts.")
     if changed: print("  " + ", ".join(changed))
@@ -421,7 +423,7 @@ def restore():
     print("Restored pristine zcode.cjs (customizations AND persona removed).")
 
 def diff():
-    orig = ORIG.read_text(encoding="utf-8")
+    orig = open(ORIG, "r", encoding="utf-8", newline="").read()
     changed = [pid for *_, pid in _collect_edits(orig)]
     if not changed:
         print("No prompts changed from stock.")

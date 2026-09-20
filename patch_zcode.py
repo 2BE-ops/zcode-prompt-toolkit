@@ -137,7 +137,8 @@ def main() -> None:
     shutil.copy2(target, target.with_suffix(target.suffix + ".bak"))
 
     # 3) Rebuild from the pristine .orig so re-runs are always clean/idempotent.
-    data = orig.read_text(encoding="utf-8")
+    #    newline="" keeps the bundle's original line endings byte-exact.
+    data = open(orig, "r", encoding="utf-8", newline="").read()
 
     # 4) Locate the CLI-prefix literal.
     matches = list(CLI_ANCHOR.finditer(data))
@@ -158,7 +159,8 @@ def main() -> None:
     injection = f"{MARK_A}{literal}{MARK_B}"
     data = CLI_ANCHOR.sub(lambda m: injection, data, count=1)
 
-    target.write_text(data, encoding="utf-8")
+    with open(target, "w", encoding="utf-8", newline="") as f:
+        f.write(data)
 
     preview = prompt_text[:200].replace("\n", " ")
     print("\nPatched successfully.")

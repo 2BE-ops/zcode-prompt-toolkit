@@ -10,7 +10,7 @@ ZCode 在运行时于一个压缩混淆过的 bundle（`zcode.cjs`）内组装�
 1. **人格注入（Persona injection）** — 把*你自己的*系统提示词放在模型所见的一切
    之前，作为第一条系统消息。
 2. **完整提示词目录** — 查看并编辑 bundle 内*每一条*内置提示词、护栏、
-   工具描述、输出风格规则和系统区块 — 362 个被发现区块中的 747 个可编辑变量，
+   工具描述、输出风格规则和系统区块 — 872 个被发现区块中的 1,651 个可编辑变量，
    并附带安全的备份/恢复。
 
 ## 为什么
@@ -123,8 +123,11 @@ python customize_prompts.py restore   # 恢复出厂（移除编辑和人格）
 
 ## 兼容性
 
-在 Windows 上针对 **ZCode 3.9.1（production 版本）** 构建并测试。路径为
-Windows 风格（`%LOCALAPPDATA%`）；在其他平台上请用 `--target` / 调整
+在 Windows 上针对 **ZCode 3.14.1（production 版本）** 构建并测试。最初基于
+3.9.1 开发；3.14.1 更新重写了 bundle 并将提示词面从 747 个可编辑变量扩展到
+1,651 个，随后已重新锚定并完成端到端复验（打补丁、apply、restore、对已打补丁
+bundle 执行 `node --check`）。
+路径为 Windows 风格（`%LOCALAPPDATA%`）；在其他平台上请用 `--target` / 调整
 `TARGET`，指向应用 bundle 内的 `zcode.cjs`。
 
 ZCode 应用更新会覆盖 `zcode.cjs` 并抹掉补丁 — 更新后重新运行本工具包即可。

@@ -11,7 +11,7 @@ ZCode assembles its entire system prompt at runtime inside a minified bundle
    else the model sees, as the very first system message.
 2. **Full prompt catalog** — view and edit *every* built-in prompt, guardrail,
    tool description, output-style rule, and system section in the bundle —
-   747 editable variables across 362 discovered blocks, with safe
+   1,651 editable variables across 872 discovered blocks, with safe
    backup/restore.
 
 ## Why
@@ -144,7 +144,11 @@ means no persona is injected and the stock CLI prefix stays.
 
 ## Compatibility
 
-Built and tested against **ZCode 3.9.1 (production flavor)** on Windows.
+Built and tested against **ZCode 3.14.1 (production flavor)** on Windows.
+Originally built on 3.9.1; re-anchored and re-verified end-to-end (patch,
+apply, restore, `node --check` on the patched bundle) after the 3.14.1
+update, which rewrote the bundle and grew the prompt surface from 747 to
+1,651 editable variables.
 Paths are Windows-style (`%LOCALAPPDATA%`); on other platforms pass
 `--target` / adjust `TARGET` to point at the `zcode.cjs` inside the app
 bundle.
