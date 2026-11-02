@@ -68,7 +68,7 @@ MARK_B = "/*ZC_PROMPT_END*/"
 # CLI prefix's original text ("You are ZCode...") is replaced by the persona.
 # This anchor matches that stable product literal. We rebuild from the pristine
 # .orig each run, so injection is always clean/idempotent (no marker-stripping).
-CLI_ANCHOR = re.compile(r'"You are ZCode, an interactive coding agent"')
+CLI_ANCHOR = re.compile(r'"You are ZCode, an interactive agent"')
 
 
 def die(msg: str) -> None:
